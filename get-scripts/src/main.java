@@ -187,7 +187,7 @@ public class main {
             String title = "";
 
             //System.out.println(input);
-            FileWriter file = new FileWriter(urlTitle + ".txt");
+            FileWriter file = new FileWriter("scripts"+urlTitle + ".txt");
             file.write(input);
             file.close();
 
