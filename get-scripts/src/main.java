@@ -170,7 +170,7 @@ public class main {
             System.out.println("https://imsdb.com" + scriptURLs.get(i));
 
             try{
-            System.out.println("Written: " + writeToFile(getScript("https://imsdb.com" + scriptURLs.get(i))));
+            System.out.println("Written: " + writeToFile(getScript("https://imsdb.com" + scriptURLs.get(i)), scriptURLs.get(i).replaceAll("/", "")));
             }
             catch (Exception e){}
                 System.out.println("Written: false");
@@ -181,17 +181,13 @@ public class main {
         return output;
     }
 
-    private static boolean writeToFile(String input){
+    private static boolean writeToFile(String input, String urlTitle){
 
         try{
             String title = "";
 
-            for (int i = 0; i < input.lines().toArray().length; i++) {
-                if (input.lines().toArray()[i].toString().replaceAll(" ", "").length() != 0) {title = input.lines().toArray()[i].toString().replaceAll(" ", ""); break;}
-            }
-
             //System.out.println(input);
-            FileWriter file = new FileWriter(title + ".txt");
+            FileWriter file = new FileWriter(urlTitle + ".txt");
             file.write(input);
             file.close();
 
