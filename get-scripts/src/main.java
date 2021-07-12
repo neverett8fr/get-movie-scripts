@@ -170,7 +170,7 @@ public class main {
             System.out.println("https://imsdb.com" + scriptURLs.get(i));
 
             try{
-            System.out.println("Written: " + writeToFile(getScript("https://imsdb.com" + scriptURLs.get(i)), scriptURLs.get(i).replaceAll("/scripts/", "").replaceAll(".html", "")));
+            System.out.println("Written: " + writeToFile(getScript("https://imsdb.com" + scriptURLs.get(i)), scriptURLs.get(i)));
             }
             catch (Exception e){}
                 System.out.println("Written: false");
@@ -186,9 +186,15 @@ public class main {
         try{
             String title = "";
 
+            if (input.length() == 0){
+                System.out.println("org: " + input);
+                input = getScript("https://imsdb.com" + urlTitle);
+                System.out.println("redo: " + input);
+            }
+
             //System.out.println(input);
-            System.out.println("Title: " + urlTitle);
-            FileWriter file = new FileWriter(urlTitle + ".txt");
+            System.out.println("Title: " + urlTitle.replaceAll("/scripts/", "").replaceAll(".html", ""));
+            FileWriter file = new FileWriter(urlTitle.replaceAll("/scripts/", "").replaceAll(".html", "") + ".txt");
             file.write(input);
             file.close();
 
@@ -197,6 +203,7 @@ public class main {
         }
         catch (Exception e){
             System.out.println("An error occurred.");
+            System.out.println(input);
             return false;
         }
 
