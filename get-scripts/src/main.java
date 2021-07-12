@@ -186,6 +186,7 @@ public class main {
         try{
             String title = "";
 
+            // The redo bit doesn't seem to do much at all, gotta have a look later
             if (input.length() == 0){
                 System.out.println("org: " + input);
                 input = getScript("https://imsdb.com" + urlTitle);
