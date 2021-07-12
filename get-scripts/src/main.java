@@ -187,7 +187,7 @@ public class main {
             String title = "";
 
             for (int i = 0; i < input.lines().toArray().length; i++) {
-                if (input.lines().toArray()[i].toString().length() != 0) {title = input.lines().toArray()[i].toString().replaceAll(" ", ""); break;}
+                if (input.lines().toArray()[i].toString().replaceAll(" ", "").length() != 0) {title = input.lines().toArray()[i].toString().replaceAll(" ", ""); break;}
             }
 
             //System.out.println(input);
