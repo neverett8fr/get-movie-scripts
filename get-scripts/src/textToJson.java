@@ -25,23 +25,47 @@ public class textToJson {
         String script = "{";
         for (int i = 0; i < fileNames.length; i++){
         //for (int i = 0; i < 20; i++){
+            System.out.println(fileNames[i]);
 
-            script += "movie" + fileNames[i].replaceAll(".txt","").replace('.','m').replaceAll(" ","").replaceAll("-", "") + ":[";
+            script += "\"movie" + fileNames[i].replaceAll(".txt","").replace('.','m').replaceAll(" ","").replaceAll("-", "") + "\":[";
             try {
                 File myObj = new File(directory + fileNames[i]);
                 Scanner myReader = new Scanner(myObj);
+
+                String lineOfTxt = "";
                 while (myReader.hasNextLine()) {
-                    script += "\"" + myReader.nextLine().replaceAll("\"", "").replaceAll("'","") + "\",";
+                    //script += "\"";
+                    lineOfTxt += myReader.nextLine().replaceAll("\"", "").replaceAll("'","").strip();
+                    //script += "\",";
                 }
+                //System.out.println(lineOfTxtSplit.length);
+                // have to change to include sentences or the searching thing wont really work - also included commas, but might change
                 myReader.close();
+
+                String[] lineOfTxtSplit = lineOfTxt.split("[.|!|?|,]");
+                for (int j = 0; j < lineOfTxtSplit.length; j++){
+                    script += "\"" + lineOfTxtSplit[j] + "\"";
+                    if (j < lineOfTxtSplit.length - 1){
+                        script += ",";
+                    }
+
+                }
+
+
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
-            script += "],";
+            script += "]";
+            if (i < fileNames.length - 1){
+                script += ",";
+
+            }
 
         }
         script += "}";
+
+        script = script.replaceAll(",]", "]");
 
         return script;
 
@@ -61,7 +85,7 @@ public class textToJson {
 
         }
 
-        System.out.println(json);
+        System.out.println("JSON written");
 
     }
 }
